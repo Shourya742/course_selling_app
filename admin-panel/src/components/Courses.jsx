@@ -19,12 +19,40 @@ const Courses = () => {
     init();
   }, []);
   return (
-    <div>
+    <div
+      style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+    >
       {courses.map((course, index) => {
-        return <h1 key={index}>hello</h1>;
+        return <Course key={index} course={course} />;
       })}
     </div>
   );
 };
+
+export function Course({ course }) {
+  const navigate = useNavigate();
+  return (
+    <Card style={{ margin: 10, width: 300, minHeight: 200, padding: 20 }}>
+      <Typography textAlign={"center"} variant="h5">
+        {course.title}
+      </Typography>
+      <Typography textAlign={"center"} variant="subtitle1">
+        {course.description}
+      </Typography>
+      <img src={course.imageLink} style={{ width: 300 }} />
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => {
+            navigate("/course/" + course._id);
+          }}
+        >
+          Edit
+        </Button>
+      </div>
+    </Card>
+  );
+}
 
 export default Courses;
